@@ -1,6 +1,6 @@
 {
   "product": "Mazandasht Desktop",
-  "stage": "arena-g12",
+  "stage": "arena-g13",
   "version": "0.5.2-alpha3",
   "scope": [
     "incremental schema migration to schema version 7",
@@ -9,7 +9,8 @@
     "backup profiles with retention, SHA-256 verification and automatic logout/exit backups",
     "restore with manager approval, PRE_RESTORE safety copy and atomic swap",
     "user administration gated by users.manage with a single password policy",
-    "Windows x64 build script and Inno Setup 6 installer"
+    "Windows x64 build script and Inno Setup 6 installer",
+    "end-to-end acceptance run over the data layer with dummy data"
   ],
   "data_policy": {
     "real_business_data_seeded": false,
@@ -41,7 +42,7 @@
     ]
   },
   "tests": {
-    "pytest_passed": 163,
+    "pytest_passed": 190,
     "pytest_skipped": 1,
     "sqlite_schema_version": 7,
     "sqlite_integrity_check": "passed",
@@ -51,7 +52,8 @@
     "xaml_parse": "passed",
     "csproj_parse": "passed",
     "blank_excel_templates": 11,
-    "reset_safety_contract": "passed"
+    "reset_safety_contract": "passed",
+    "g13_acceptance": "passed (dummy business day replayed with the services' own SQL)"
   },
   "windows_build": "authored_not_run_in_this_linux_environment",
   "installer": "authored_inno_setup_6_not_compiled_here",
@@ -74,5 +76,15 @@
     "installer/Mazandasht_Setup.iss",
     "installer/README_FA.md"
   ],
-  "updated_at_utc": "2026-11-20T21:43:26Z"
+  "updated_at_utc": "2026-11-20T21:55:00Z",
+  "acceptance": {
+    "scope": "data layer + repository content (no Windows UI run)",
+    "tests": "tests/test_stage_g13_acceptance.py (8)",
+    "result": "passed",
+    "userAcceptanceOnWindows": "blocked_blk001_not_run",
+    "openItem": "O-19 sales does not issue stock (reservations only)"
+  },
+  "open_findings": [
+    "O-1..O-19 (see project_state.json)"
+  ]
 }

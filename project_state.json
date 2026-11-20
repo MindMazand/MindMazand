@@ -7,7 +7,7 @@
   "schemaVersion": 7,
   "targetSchemaVersion": 7,
   "branch": "arena/afb5578d-mindmazand",
-  "updatedAtUtc": "2026-11-20T21:45:56Z",
+  "updatedAtUtc": "2026-11-20T21:55:00Z",
   "technology": {
     "ui": "WPF",
     "language": "C# 7.3",
@@ -96,17 +96,18 @@
     },
     "G13": {
       "title": "تست پذیرش و تحویل نهایی",
-      "status": "pending",
-      "gate": "not_started"
+      "status": "authored",
+      "gate": "blocked_on_windows",
+      "note": "Data-layer acceptance with dummy data passed (190 passed / 1 skipped / 0 failed); the end-user acceptance run on Windows (UI, installer, execution) still needs Windows (BLK-001)."
     }
   },
   "verification": {
     "pytest": {
-      "passed": 182,
+      "passed": 190,
       "skipped": 1,
       "failed": 0,
-      "command": ".venv/bin/python -m pytest -q tests/",
-      "verifiedAtUtc": "2026-11-20T21:45:56Z"
+      "command": "Mazandasht_Stage05/.venv/bin/python -m pytest -q tests/",
+      "verifiedAtUtc": "2026-11-20T21:55:00Z"
     },
     "sqliteIntegrityCheck": "passed",
     "sqliteForeignKeyCheck": "passed",
@@ -260,6 +261,14 @@
       "installer": "installer/Mazandasht_Setup.iss (per-user, x64 only, Windows 8.1 minimum)",
       "installerDocs": "installer/README_FA.md",
       "tests": "tests/test_stage_g12_build_installer.py (19)"
+    },
+    "g13Acceptance": {
+      "tests": "tests/test_stage_g13_acceptance.py (8)",
+      "approach": "runs the services' own extracted SQL constants against a real SQLite database built from schema_v1 + system_seed + migration_002..007",
+      "scenario": "dummy business day: stock receipt, purchase 100000g@6000, sale 100000g@10000 (VAT 9%), bank payment, cheque cleared, settlement allocation",
+      "expectedResults": "purchase net 600000 IRR; sale 1000000 IRR (revenue 917431 + VAT 82569); party balance 600000 debit; gross profit 317431 IRR; bank -200000 IRR; REVIEW documents have no financial effect",
+      "checks": "posted-only reports, full reset rebuilds clean v7 schema, no real data in the repository, a report exists for every stage G0..G13",
+      "result": "passed"
     }
   },
   "dataPolicy": {
@@ -286,7 +295,8 @@
     "Scheduled backup (reason SCHEDULED) has the schema and service support but no real scheduler; lands with the Windows task in G12",
     "Windows build, installer compilation and UI run are still not executed (BLK-001)",
     "Installer and executable are not code-signed (O-16)",
-    ".NET Framework 4.8 is a manual prerequisite; the installer does not provision it (O-17)"
+    ".NET Framework 4.8 is a manual prerequisite; the installer does not provision it (O-17)",
+    "G13: فروش موجودی را صادر نمی‌کند (فقط رزرو)؛ به O-19 مراجعه شود."
   ],
   "blockers": [
     {
@@ -329,7 +339,14 @@
     "O-14 PlatformTarget is AnyCPU with Prefer32Bit=false; set explicitly to x64 in G12 if that is the requirement",
     "O-15 SCHEDULED backups need a Windows Task Scheduler integration (G12)",
     "O-16 no code signing for the installer or the executable (SmartScreen warnings)",
-    "O-17 .NET Framework 4.8 is not provisioned by the installer"
+    "O-17 .NET Framework 4.8 is not provisioned by the installer",
+    {
+      "id": "O-19",
+      "stage": "G13",
+      "text": "صدور موجودی (ISSUE) هنگام فروش انجام نمی‌شود؛ SalesService فقط رزرو می‌کند و v_stock_on_hand موجودی صادرنشده را نشان می‌دهد. محافظت از oversell برقرار است اما گزارش موجودی و کنترل انبار نیاز به حرکت ISSUE دارد.",
+      "severity": "medium",
+      "owner": true
+    }
   ],
   "history": {
     "note": "Local git history G1..G10 and the .venv were lost when the sandbox workspace was reset on 2026-11-19; the untracked source tree survived. The surviving tree was re-committed as one reconstruction commit, then pushed. Per-stage reports and tests remain the authoritative per-phase record.",
@@ -345,6 +362,8 @@
       "dbcc9c4",
       "b4b9571",
       "2eed577"
-    ]
-  }
+    ],
+    "g13": "2026-11-19: اجرای پذیرش داده‌لایه با روز کاری آزمایشی و SQL واقعی سرویس‌ها؛ ۱۹۰ قبول / ۱ رد؛ گزارش docs/G13_Acceptance_Delivery_Report_FA.md؛ ثبت O-19."
+  },
+  "docsLayout": "all stage reports live in Mazandasht_Stage05/docs/ (G0..G13, G2 reconstructed)"
 }
