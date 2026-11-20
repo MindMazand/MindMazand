@@ -1,0 +1,38 @@
+# === Mazandasht project-wide ignore rules ===
+# (The preserved package keeps its own .gitignore inside Mazandasht_Stage05/)
+
+# Python tooling
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+
+# Local database and WAL
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+
+# Connector download staging
+google_drive/
+
+# Private / operational data
+sources/
+Backups/
+Exports/
+Imports/
+Logs/
+*.key
+*.pfx
+*.pem
+*.secrets

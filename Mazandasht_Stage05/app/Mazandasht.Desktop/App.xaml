@@ -1,0 +1,17 @@
+<Application x:Class="Mazandasht.Desktop.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Startup="Application_Startup"
+             ShutdownMode="OnMainWindowClose">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Shared control styles (DynamicResource-based, theme-ready). -->
+                <ResourceDictionary Source="Assets/Themes/Common.xaml"/>
+                <!-- Default theme: Windows (light). Replaceable at runtime by
+                     Services.ThemeService; the choice is persisted in app_settings. -->
+                <ResourceDictionary Source="Assets/Themes/Theme.Windows.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

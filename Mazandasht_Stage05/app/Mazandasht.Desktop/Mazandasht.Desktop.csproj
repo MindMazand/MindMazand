@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net48</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <LangVersion>7.3</LangVersion>
+    <RootNamespace>Mazandasht.Desktop</RootNamespace>
+    <AssemblyName>Mazandasht.Desktop</AssemblyName>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\Icons\app.ico</ApplicationIcon>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
+    <PackageReference Include="ExcelDataReader" Version="3.9.0" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net48" Version="1.0.3" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Database\*.sql" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="Templates\*.xlsx" CopyToOutputDirectory="PreserveNewest" />
+    <Resource Include="Assets\mazandasht-logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Dedicated icon set and brand font (G4).
+         The .NET WindowsDesktop SDK already picks up **/*.xaml as Page items,
+         so the theme dictionaries must NOT be listed here again (duplicate
+         Page items fail the build). Images and fonts are not covered by the
+         default globs, so they are declared explicitly like the logo above. -->
+    <Resource Include="Assets\Icons\*.png" />
+    <Resource Include="Assets\Icons\app.ico" />
+    <Resource Include="Assets\Fonts\*.ttf" />
+  </ItemGroup>
+</Project>

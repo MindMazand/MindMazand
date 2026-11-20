@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" font-family="Vazirmatn, Segoe UI, Tahoma">
+<rect width="1200" height="900" fill="#0B1711"/>
+<text x="1170" y="52" font-size="24" font-weight="bold" fill="#EAF4ED" text-anchor="end">کتابخانه اجزای رابط کاربری مازندشت</text>
+<rect x="60" y="86" width="110" height="60" rx="10" fill="#54B50D"/>
+<text x="115" y="168" font-size="11" fill="#A9B9AE" text-anchor="middle">BrandGreen</text>
+<rect x="188" y="86" width="110" height="60" rx="10" fill="#D46909"/>
+<text x="243" y="168" font-size="11" fill="#A9B9AE" text-anchor="middle">Accent</text>
+<rect x="316" y="86" width="110" height="60" rx="10" fill="#D46909"/>
+<text x="371" y="168" font-size="11" fill="#A9B9AE" text-anchor="middle">BrandOrange</text>
+<rect x="444" y="86" width="110" height="60" rx="10" fill="#EAF4ED"/>
+<text x="499" y="168" font-size="11" fill="#A9B9AE" text-anchor="middle">Text</text>
+<rect x="572" y="86" width="110" height="60" rx="10" fill="#A9B9AE"/>
+<text x="627" y="168" font-size="11" fill="#A9B9AE" text-anchor="middle">MutedText</text>
+<rect x="700" y="86" width="110" height="60" rx="10" fill="#B3261E"/>
+<text x="755" y="168" font-size="11" fill="#A9B9AE" text-anchor="middle">Danger</text>
+<rect x="828" y="86" width="110" height="60" rx="10" fill="#2E7D32"/>
+<text x="883" y="168" font-size="11" fill="#A9B9AE" text-anchor="middle">Success</text>
+<rect x="956" y="86" width="110" height="60" rx="10" fill="#B26A00"/>
+<text x="1011" y="168" font-size="11" fill="#A9B9AE" text-anchor="middle">Warning</text>
+<text x="1170" y="232" font-size="16" font-weight="bold" fill="#EAF4ED" text-anchor="end">دکمه‌ها</text>
+<rect x="60" y="250" width="180" height="48" rx="12" fill="#D46909" stroke="#2C4636"/>
+<text x="150" y="280" font-size="14" fill="#FFFFFF" text-anchor="middle">دکمه اصلی</text>
+<rect x="270" y="250" width="180" height="48" rx="12" fill="#16241C" stroke="#2C4636"/>
+<text x="360" y="280" font-size="14" fill="#EAF4ED" text-anchor="middle">دکمه شیشه‌ای</text>
+<rect x="480" y="250" width="180" height="48" rx="12" fill="#B3261E" stroke="#2C4636"/>
+<text x="570" y="280" font-size="14" fill="#FFFFFF" text-anchor="middle">دکمه مخرب</text>
+<text x="1170" y="372" font-size="16" font-weight="bold" fill="#EAF4ED" text-anchor="end">فیلدهای ورودی</text>
+<rect x="60" y="390" width="380" height="76" rx="12" fill="#16241C" stroke="#2C4636"/>
+<text x="420" y="418" font-size="12" fill="#A9B9AE" text-anchor="end">کد محصول</text>
+<text x="420" y="448" font-size="16" fill="#EAF4ED" text-anchor="end">PR-1024</text>
+<rect x="480" y="390" width="380" height="76" rx="12" fill="#16241C" stroke="#2C4636"/>
+<text x="840" y="418" font-size="12" fill="#A9B9AE" text-anchor="end">نام محصول</text>
+<text x="840" y="448" font-size="16" fill="#EAF4ED" text-anchor="end">پرتقال واشینگتن</text>
+<text x="1170" y="532" font-size="16" font-weight="bold" fill="#EAF4ED" text-anchor="end">برچسب‌های وضعیت</text>
+<rect x="60" y="550" width="180" height="40" rx="20" fill="#16241C" stroke="#A9B9AE"/>
+<circle cx="220" cy="570" r="5" fill="#A9B9AE"/>
+<text x="180" y="576" font-size="13" fill="#EAF4ED" text-anchor="middle">پیش‌نویس</text>
+<rect x="270" y="550" width="180" height="40" rx="20" fill="#16241C" stroke="#B26A00"/>
+<circle cx="430" cy="570" r="5" fill="#B26A00"/>
+<text x="390" y="576" font-size="13" fill="#EAF4ED" text-anchor="middle">در بررسی</text>
+<rect x="480" y="550" width="180" height="40" rx="20" fill="#16241C" stroke="#2E7D32"/>
+<circle cx="640" cy="570" r="5" fill="#2E7D32"/>
+<text x="600" y="576" font-size="13" fill="#EAF4ED" text-anchor="middle">تأییدشده</text>
+<rect x="690" y="550" width="180" height="40" rx="20" fill="#16241C" stroke="#B3261E"/>
+<circle cx="850" cy="570" r="5" fill="#B3261E"/>
+<text x="810" y="576" font-size="13" fill="#EAF4ED" text-anchor="middle">باطل‌شده</text>
+<rect x="60" y="620" width="1080" height="250" rx="16" fill="#16241C" stroke="#2C4636"/>
+<text x="1120" y="656" font-size="15" font-weight="bold" fill="#EAF4ED" text-anchor="end">نمونه جدول اسناد</text>
+<text x="980" y="692" font-size="12" fill="#A9B9AE">شماره سند</text>
+<text x="830" y="692" font-size="12" fill="#A9B9AE">نوع</text>
+<text x="700" y="692" font-size="12" fill="#A9B9AE">تاریخ</text>
+<text x="540" y="692" font-size="12" fill="#A9B9AE">مقدار</text>
+<text x="390" y="692" font-size="12" fill="#A9B9AE">وضعیت</text>
+<text x="1110" y="726" font-size="13" fill="#EAF4ED" text-anchor="end">W-1404-000128</text>
+<text x="960" y="726" font-size="13" fill="#EAF4ED" text-anchor="end">باسکول ورودی</text>
+<text x="810" y="726" font-size="13" fill="#EAF4ED" text-anchor="end">۱۴۰۴/۰۸/۲۹</text>
+<text x="680" y="726" font-size="13" fill="#EAF4ED" text-anchor="end">۴٬۲۰۰ kg</text>
+<text x="520" y="726" font-size="13" fill="#EAF4ED" text-anchor="end">تأییدشده</text>
+<line x1="80" y1="748" x2="1120" y2="748" stroke="#1E2E24"/>
+<text x="1110" y="770" font-size="13" fill="#EAF4ED" text-anchor="end">S-1404-000045</text>
+<text x="960" y="770" font-size="13" fill="#EAF4ED" text-anchor="end">سورتینگ</text>
+<text x="810" y="770" font-size="13" fill="#EAF4ED" text-anchor="end">۱۴۰۴/۰۸/۲۹</text>
+<text x="680" y="770" font-size="13" fill="#EAF4ED" text-anchor="end">۳٬۸۰۰ kg</text>
+<text x="520" y="770" font-size="13" fill="#EAF4ED" text-anchor="end">در بررسی</text>
+<line x1="80" y1="792" x2="1120" y2="792" stroke="#1E2E24"/>
+</svg>

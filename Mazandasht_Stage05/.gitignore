@@ -1,0 +1,24 @@
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+
+# Local database and WAL
+*.db
+*.db-shm
+*.db-wal
+*.sqlite-journal
+
+# Private / operational data
+sources/
+Backups/
+Exports/
+Imports/
+Logs/
+*.key
+*.pfx
+*.pem
+*.secrets

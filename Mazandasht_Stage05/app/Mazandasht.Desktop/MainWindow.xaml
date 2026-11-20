@@ -1,0 +1,312 @@
+<Window x:Class="Mazandasht.Desktop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="سامانه مدیریت مازندشت" WindowState="Maximized" WindowStyle="None"
+        ResizeMode="CanResizeWithGrip" MinWidth="1120" MinHeight="720"
+        FlowDirection="RightToLeft" Background="#0B1711">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="82"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Fixed application header -->
+        <Border Grid.Row="0" Background="#E60B2618" BorderBrush="#35FFFFFF" BorderThickness="0,0,0,1"
+                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+            <Grid Margin="22,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="Assets/mazandasht-logo.png" Width="92" Height="58" Stretch="Uniform"/>
+                    <StackPanel VerticalAlignment="Center" Margin="12,0,0,0">
+                        <TextBlock Text="سامانه یکپارچه مازندشت" FontSize="18" FontWeight="Bold"/>
+                        <TextBlock Text="مدیریت عملیات، بازرگانی و حسابداری" FontSize="11" Foreground="#A9B9AE"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Border Background="#1F54B50D" BorderBrush="#5554B50D" BorderThickness="1" CornerRadius="20" Padding="12,7">
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Width="7" Height="7" Fill="#54B50D" Margin="0,0,7,0"/>
+                            <TextBlock Text="آفلاین | پایگاه داده محلی" FontSize="11" Foreground="#D8F0D4"/>
+                        </StackPanel>
+                    </Border>
+                    <TextBlock x:Name="DateText" Text="—" Foreground="#B9C9BE" VerticalAlignment="Center" Margin="18,0,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button x:Name="CurrencyButton" Content="نمایش ریال" Style="{StaticResource GlassButton}"
+                            Margin="0,0,10,0" Click="ToggleCurrency_Click"/>
+                    <Button x:Name="ThemeButton" Style="{StaticResource GlassButton}"
+                            Margin="0,0,10,0" Click="Theme_Click" ToolTip="انتخاب تم رابط کاربری">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="Assets/Icons/theme.png" Width="18" Height="18" Margin="0,0,7,0"/>
+                            <TextBlock Text="تم" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Border Background="#25FFFFFF" BorderBrush="#45FFFFFF" BorderThickness="1" CornerRadius="18" Padding="12,8">
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Width="8" Height="8" Fill="#54B50D" Margin="0,0,8,0"/>
+                            <TextBlock x:Name="UserNameText" Text="مدیر" FontSize="12"/>
+                        </StackPanel>
+                    </Border>
+                    <Button Content="—" Style="{StaticResource GlassButton}" Width="38" Margin="10,0,4,0" Click="Minimize_Click"/>
+                    <Button Content="×" Style="{StaticResource GlassButton}" Width="38" Click="Close_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Fixed shell: sidebar and scrollable content -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="252"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="#B512241A" BorderBrush="#28FFFFFF" BorderThickness="0,0,1,0" Padding="16,20">
+                <DockPanel LastChildFill="True">
+                    <StackPanel DockPanel.Dock="Top">
+                        <TextBlock Text="فضای کاری" Foreground="#8FA79A" FontSize="11" Margin="10,0,0,12"/>
+                        <Button Tag="داشبورد مدیریتی" Style="{StaticResource NavButton}" Click="OpenDashboard_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/dashboard.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="داشبورد مدیریتی" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="نمایشگر دوم" Style="{StaticResource NavButton}" Click="OpenSecondDisplay_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/dashboard.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="نمایشگر دوم (سالن)" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="ثبت سریع عملیات" Style="{StaticResource NavButton}" Click="OpenQuickEntry_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/quick-add.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="ثبت سریع عملیات" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="بررسی و تأیید اسناد" Style="{StaticResource NavButton}" Click="OpenApproval_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/approval.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="بررسی و تأیید اسناد" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="باسکول و ورود بار" Style="{StaticResource NavButton}" Click="OpenWeighing_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/weighing.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="باسکول و ورود بار" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="سورتینگ و انبار" Style="{StaticResource NavButton}" Click="OpenOperationalModules_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/sorting.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="سورتینگ و انبار" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="خرید و فروش" Style="{StaticResource NavButton}" Click="OpenFinanceModules_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/trade.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="خرید و فروش" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="حسابداری و مالی" Style="{StaticResource NavButton}" Click="OpenAccounting_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/accounting.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="حسابداری و مالی" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="بانک و چک" Style="{StaticResource NavButton}" Click="OpenFinanceModules_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/bank.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="بانک و چک" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="سبد و امانی" Style="{StaticResource NavButton}" Click="OpenOperationalModules_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/basket.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="سبد و امانی" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="اشخاص و کارکنان" Style="{StaticResource NavButton}" Click="OpenMasterData_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/parties.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="اشخاص و کارکنان" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="صف ورود و خروجی اطلاعات" Style="{StaticResource NavButton}" Click="OpenImportQueue_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/import.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="صف ورود و خروجی اطلاعات" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="فهرست‌های پایه تکمیلی" Style="{StaticResource NavButton}" Click="OpenBaseData_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/settings.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="فهرست‌های پایه تکمیلی" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="گزارش‌های تحلیلی" Style="{StaticResource NavButton}" Click="OpenReports_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/reports.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="گزارش‌های تحلیلی" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="ImportButton" Tag="ورود اطلاعات Excel" Style="{StaticResource NavButton}" Click="Import_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/import.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="ورود اطلاعات Excel / CSV" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel DockPanel.Dock="Bottom">
+                        <Separator Background="#35FFFFFF" Margin="6,12"/>
+                        <Button Tag="اطلاعات پایه و تنظیمات" Style="{StaticResource NavButton}" Click="OpenMasterData_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/settings.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="اطلاعات پایه و تنظیمات" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="DatabaseMaintenanceButton" Tag="مدیریت پایگاه داده" Style="{StaticResource NavButton}" Click="DatabaseMaintenance_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/backup.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="مدیریت پایگاه داده" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <TextBlock Text="MAZANDASHT · OFFLINE DESKTOP" FontSize="9" Foreground="#71857A" Margin="10,18,0,0"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <Grid Grid.Column="1">
+                <Grid Margin="28,26,28,26">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0.72*"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="0,0,0,18">
+                        <TextBlock x:Name="PageTitleText" Text="داشبورد مدیریتی" FontSize="25" FontWeight="Bold"/>
+                        <TextBlock x:Name="PageSubtitleText" Text="نمای کلی عملکرد مجموعه بر پایه اسناد تأییدشده"
+                                   Foreground="#A9B9AE" FontSize="12" Margin="0,6,0,0"/>
+                    </StackPanel>
+
+                    <UniformGrid Grid.Row="1" Columns="4" Margin="0,0,0,16">
+                        <Border Style="{StaticResource GlassCard}" Margin="0,0,10,0">
+                            <StackPanel>
+                                <TextBlock Text="وزن ورودی امروز" Foreground="#A9B9AE" FontSize="11"/>
+                                <TextBlock x:Name="InboundKpiText" Text="—" FontSize="27" FontWeight="Bold" Margin="0,8,0,2"/>
+                                <TextBlock Text="کیلوگرم | داده تأییدشده" Foreground="#829589" FontSize="10"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource GlassCard}" Margin="0,0,10,0">
+                            <StackPanel>
+                                <TextBlock Text="وزن خروجی امروز" Foreground="#A9B9AE" FontSize="11"/>
+                                <TextBlock x:Name="OutboundKpiText" Text="—" FontSize="27" FontWeight="Bold" Margin="0,8,0,2"/>
+                                <TextBlock Text="کیلوگرم | داده تأییدشده" Foreground="#829589" FontSize="10"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource GlassCard}" Margin="0,0,10,0">
+                            <StackPanel>
+                                <TextBlock Text="فروش امروز" Foreground="#A9B9AE" FontSize="11"/>
+                                <TextBlock x:Name="SalesKpiText" Text="—" FontSize="27" FontWeight="Bold" Margin="0,8,0,2"/>
+                                <TextBlock x:Name="SalesUnitText" Text="ریال | سند قطعی" Foreground="#829589" FontSize="10"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource GlassCard}">
+                            <StackPanel>
+                                <TextBlock Text="مانده خالص اشخاص" Foreground="#A9B9AE" FontSize="11"/>
+                                <TextBlock x:Name="PartyBalanceKpiText" Text="—" FontSize="27" FontWeight="Bold" Margin="0,8,0,2"/>
+                                <TextBlock x:Name="PartyBalanceUnitText" Text="ریال | دفتر کل" Foreground="#829589" FontSize="10"/>
+                            </StackPanel>
+                        </Border>
+                    </UniformGrid>
+
+                    <Grid Grid.Row="2" Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.65*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Style="{StaticResource GlassCard}" Margin="0,0,10,0">
+                            <StackPanel>
+                                <TextBlock Text="تحلیل جریان ورودی و خروجی" FontSize="15" FontWeight="SemiBold"/>
+                                <TextBlock Text="نمودار بر اساس تراکنش‌های قطعی و بازه زمانی انتخاب‌شده ساخته می‌شود."
+                                           Foreground="#A9B9AE" FontSize="10" Margin="0,6,0,14"/>
+                                <Border Background="#16FFFFFF" BorderBrush="#25FFFFFF" BorderThickness="1"
+                                        CornerRadius="14" MinHeight="130" Padding="8">
+                                    <Canvas x:Name="TrendChartCanvas" Height="130" ClipToBounds="True"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="1" Style="{StaticResource GlassCard}">
+                            <StackPanel>
+                                <TextBlock Text="شاخص‌های مدیریتی" FontSize="15" FontWeight="SemiBold"/>
+                                <TextBlock Text="خلاصه وضعیت بر اساس داده واقعی"
+                                           Foreground="#A9B9AE" FontSize="10" Margin="0,6,0,14"/>
+                                <Border Background="#18FFFFFF" CornerRadius="12" Padding="12" Margin="0,0,0,8">
+                                    <StackPanel>
+                                        <TextBlock Text="اسناد در انتظار تأیید" Foreground="#A9B9AE" FontSize="10"/>
+                                        <TextBlock x:Name="PendingKpiText" Text="—" FontSize="22" FontWeight="Bold" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                                <Border Background="#18FFFFFF" CornerRadius="12" Padding="12">
+                                    <StackPanel>
+                                        <TextBlock Text="چک‌های سررسیدشده" Foreground="#A9B9AE" FontSize="10"/>
+                                        <TextBlock x:Name="OverdueChequeKpiText" Text="—" FontSize="22" FontWeight="Bold" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <Border Grid.Row="3" Style="{StaticResource GlassCard}">
+                        <DockPanel LastChildFill="True">
+                            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
+                                <TextBlock Text="آخرین اسناد و عملیات" FontSize="15" FontWeight="SemiBold"/>
+                                <TextBlock Text="   ·   فقط اسناد واقعی ثبت‌شده در سیستم" Foreground="#8FA397" FontSize="10"
+                                           VerticalAlignment="Center"/>
+                            </StackPanel>
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                <Border Background="#16FFFFFF" CornerRadius="12" Padding="16">
+                                    <TextBlock Text="فهرست اسناد پس از راه‌اندازی ماژول ثبت عملیات در این قسمت نمایش داده می‌شود."
+                                               Foreground="#A9B9AE" FontSize="11" HorizontalAlignment="Center"/>
+                                </Border>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Quick-entry overlay -->
+                <Grid x:Name="QuickEntryOverlay" Visibility="Collapsed" Background="#99000000">
+                    <Border Background="#F01A2B20" BorderBrush="#66FFFFFF" BorderThickness="1"
+                            CornerRadius="22" Padding="24" Width="560" Height="500"
+                            HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel>
+                            <DockPanel Margin="0,0,0,18">
+                                <TextBlock Text="مرکز ثبت سریع عملیات" FontSize="19" FontWeight="Bold"/>
+                                <Button Content="×" Style="{StaticResource GlassButton}" Width="36" Height="34"
+                                        DockPanel.Dock="Left" Click="CloseQuickEntry_Click"/>
+                            </DockPanel>
+                            <UniformGrid Columns="2">
+                                <Button Content="⚖  ثبت باسکول" Style="{StaticResource GlassButton}" Margin="4" Height="62" Click="OpenWeighing_Click"/>
+                                <Button Content="◈  ثبت سورتینگ" Style="{StaticResource GlassButton}" Margin="4" Height="62" IsEnabled="False"/>
+                                <Button Content="▤  فاکتور خرید" Style="{StaticResource GlassButton}" Margin="4" Height="62" IsEnabled="False"/>
+                                <Button Content="▤  فاکتور فروش" Style="{StaticResource GlassButton}" Margin="4" Height="62" IsEnabled="False"/>
+                                <Button Content="＋  دریافت وجه" Style="{StaticResource GlassButton}" Margin="4" Height="62" IsEnabled="False"/>
+                                <Button Content="－  پرداخت وجه" Style="{StaticResource GlassButton}" Margin="4" Height="62" IsEnabled="False"/>
+                                <Button Content="▣  ثبت چک" Style="{StaticResource GlassButton}" Margin="4" Height="62" IsEnabled="False"/>
+                                <Button Content="▣  گردش سبد" Style="{StaticResource GlassButton}" Margin="4" Height="62" IsEnabled="False"/>
+                            </UniformGrid>
+                            <TextBlock Text="فرم‌های ثبت پس از تکمیل اتصال دیتابیس و کنترل‌های اعتبارسنجی فعال می‌شوند."
+                                       Foreground="#A9B9AE" FontSize="10" TextWrapping="Wrap" Margin="4,18,4,0"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

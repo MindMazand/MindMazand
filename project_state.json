@@ -1,0 +1,325 @@
+{
+  "product": "Mazandasht Desktop",
+  "productNameFa": "مازندشت",
+  "targetVersion": "0.5.2-alpha3",
+  "baselineVersion": "0.5.1-alpha2",
+  "baselineSource": "Google Drive: Mazandasht_Stage05 (imported 2026-11-19)",
+  "schemaVersion": 7,
+  "targetSchemaVersion": 7,
+  "branch": "arena/afb5578d-mindmazand",
+  "updatedAtUtc": "2026-11-20T21:25:09Z",
+  "technology": {
+    "ui": "WPF",
+    "language": "C# 7.3",
+    "runtime": ".NET Framework 4.8",
+    "architecture": "x64",
+    "database": "SQLite (System.Data.SQLite.Core 1.0.119)",
+    "excel": "ExcelDataReader 3.9.0",
+    "minOs": "Windows 8.1 Update x64"
+  },
+  "environment": {
+    "platform": "Linux x86_64 (Debian 12)",
+    "dotnetSdk": false,
+    "msbuild": false,
+    "csharpCompiler": false,
+    "python": "3.11.2",
+    "pytest": "9.2.0",
+    "openpyxl": "3.1.5",
+    "sqlite": "3.40.1"
+  },
+  "stages": {
+    "G0": {
+      "title": "تثبیت سورس و ممیزی نسخه فعلی",
+      "status": "passed",
+      "gate": "passed"
+    },
+    "G1": {
+      "title": "استخراج ساختار و فرمول‌های Excel",
+      "status": "passed",
+      "gate": "passed"
+    },
+    "G2": {
+      "title": "نهایی‌سازی قواعد عملیات و حسابداری",
+      "status": "passed",
+      "gate": "passed"
+    },
+    "G3": {
+      "title": "معماری و دیتابیس",
+      "status": "passed",
+      "gate": "passed"
+    },
+    "G4": {
+      "title": "طراحی و پیاده‌سازی رابط کاربری",
+      "status": "passed",
+      "gate": "passed"
+    },
+    "G5": {
+      "title": "تکمیل هسته و اطلاعات پایه",
+      "status": "passed",
+      "gate": "passed"
+    },
+    "G6": {
+      "title": "تکمیل Import و Export عملیاتی",
+      "status": "passed",
+      "gate": "passed"
+    },
+    "G7": {
+      "title": "تکمیل باسکول، انبار، سورتینگ، سبد و شراکت",
+      "status": "passed",
+      "gate": "passed"
+    },
+    "G8": {
+      "title": "تکمیل خرید، فروش، بانک، چک و تسویه",
+      "status": "passed",
+      "gate": "passed"
+    },
+    "G9": {
+      "title": "تکمیل حسابداری دوطرفه و سود/زیان",
+      "status": "passed",
+      "gate": "passed"
+    },
+    "G10": {
+      "title": "داشبورد، گزارش‌ها و نمایشگر دوم",
+      "status": "passed",
+      "gate": "passed"
+    },
+    "G11": {
+      "title": "امنیت، Backup و Restore",
+      "status": "pending",
+      "gate": "not_started"
+    },
+    "G12": {
+      "title": "Build، Installer و سازگاری Windows",
+      "status": "pending",
+      "gate": "not_started"
+    },
+    "G13": {
+      "title": "تست پذیرش و تحویل نهایی",
+      "status": "pending",
+      "gate": "not_started"
+    }
+  },
+  "verification": {
+    "pytest": {
+      "passed": 138,
+      "skipped": 1,
+      "failed": 0,
+      "command": ".venv/bin/python -m pytest -q tests/",
+      "verifiedAtUtc": "2026-11-20T21:25:09Z"
+    },
+    "sqliteIntegrityCheck": "passed",
+    "sqliteForeignKeyCheck": "passed",
+    "schemaUserVersion": 7,
+    "blankExcelTemplates": 11,
+    "xamlParse": "passed (by pytest)",
+    "csprojParse": "passed (by pytest)",
+    "wpfBuildOnWindows": "not_run_no_dotnet_msbuild_or_csharp_compiler_in_environment",
+    "installer": "not_created",
+    "uiAutomation": "not_run",
+    "excelTemplatesGen2": {
+      "themes": [
+        "Light",
+        "Dark",
+        "Caspian"
+      ],
+      "workbooks": 33,
+      "contract": "docs/11_Import_Profiles_Canonical.json",
+      "builder": "tools/build_templates.py",
+      "extractor": "tools/extract_template_structure.py",
+      "merger": "tools/merge_workbooks.py"
+    },
+    "rulesContract": "docs/12_Rules_Contract.json",
+    "migration006": {
+      "file": "app/Mazandasht.Desktop/Database/migration_006.sql",
+      "idempotent": true
+    },
+    "uiDesignSystem": {
+      "themes": [
+        "Windows (پیش‌فرض، روشن)",
+        "Dark",
+        "Caspian",
+        "Forest"
+      ],
+      "themeDictionaries": "app/Mazandasht.Desktop/Assets/Themes/Theme.*.xaml",
+      "themeBuilder": "tools/build_themes.py",
+      "commonStyles": "app/Mazandasht.Desktop/Assets/Themes/Common.xaml",
+      "themeService": "app/Mazandasht.Desktop/Services/ThemeService.cs",
+      "themeSetting": "app_settings ui.theme",
+      "themeWindow": "app/Mazandasht.Desktop/Views/ThemePreviewWindow.xaml",
+      "icons": "app/Mazandasht.Desktop/Assets/Icons (17 PNG 64x64 + app.ico)",
+      "iconBuilder": "tools/build_visuals.py",
+      "brandFont": "app/Mazandasht.Desktop/Assets/Fonts/Vazirmatn-{Regular,Bold}.ttf",
+      "mockups": "docs/visuals/ui-{mockup,design-system}-{light,dark}.svg",
+      "mockupBuilder": "tools/build_mockups.py"
+    },
+    "baseDataService": {
+      "service": "app/Mazandasht.Desktop/Services/BaseDataService.cs",
+      "window": "app/Mazandasht.Desktop/Views/BaseDataWindow.cs",
+      "entities": [
+        "main_groups",
+        "subgroups",
+        "transaction_types",
+        "product_grades",
+        "product_packaging",
+        "work_groups",
+        "employees",
+        "operational_parameters",
+        "account_natures",
+        "account_subnatures",
+        "accounting_groups",
+        "audit_groups",
+        "bank_accounts"
+      ],
+      "permission": "base.manage",
+      "hardDeletes": false,
+      "referenceCodesImmutable": true,
+      "encryption": "DPAPI (MasterDataService.ProtectText) for bank account number and IBAN",
+      "tests": "tests/test_stage_g5_base_data.py"
+    },
+    "operationalImportExport": {
+      "targetCatalog": "app/Mazandasht.Desktop/Import/ImportTargetCatalog.cs",
+      "commitEngine": "app/Mazandasht.Desktop/Import/ImportCommitService.cs",
+      "queue": "app/Mazandasht.Desktop/Import/ImportQueueService.cs",
+      "export": "app/Mazandasht.Desktop/Import/ExportService.cs",
+      "queueWindow": "app/Mazandasht.Desktop/Views/ImportQueueWindow.xaml",
+      "fiscalYear": "app/Mazandasht.Desktop/Services/FiscalYearService.cs",
+      "permission": "documents.create (commit) / reports.view (export)",
+      "effectOfCommit": "DRAFT documents only; requires_journal=0; requires_stock_posting=0",
+      "duplicateRule": "import_rows.source_row_sha256 previously IMPORTED",
+      "referenceCodes": "owner codes preserved; duplicates rejected",
+      "exportFormat": "CSV (UTF-8 with BOM); xlsx deliberately not implemented",
+      "tests": "tests/test_stage_g6_import_export.py"
+    },
+    "g7OperationalModules": {
+      "sortingService": "SortingService.cs (FIFO input allocation, trigger-owned variance, WARNING/REJECTED)",
+      "basketService": "BasketService.cs (custody balance, return limit, no journal)",
+      "partnershipService": "PartnershipService.cs (100 percent sum, 1 kg rounding, last-line remainder)",
+      "warehouseService": "WarehouseService.cs (paired TRANSFER_OUT/TRANSFER_IN, unposted)",
+      "reviewOnly": "all G7 documents are REVIEW and all G7 stock movements are is_posted=0",
+      "tests": "tests/test_stage_g7_operations.py (11)"
+    },
+    "g8FinanceModules": {
+      "purchaseService": "PurchaseService.cs (net formula, INVOICE_FOR linkage)",
+      "salesService": "SalesService.cs (FIFO allocation, oversell refused, reservations only)",
+      "bankService": "BankService.cs (BANK_TXN + payment_transactions, account resolved by id/code/title)",
+      "chequeService": "ChequeService.cs (states, unique key, clearance creates one bank transaction)",
+      "settlementService": "SettlementService.cs (allocation capped by payment, no new bank transaction)",
+      "bankStatementGapClosed": "BANK_STATEMENT bank-account code now resolves to a bank_accounts id",
+      "noJournalInG8": "G8 documents use requires_journal=0 on purpose; double-entry lands in G9",
+      "nestedDataReaderGuard": "static test forbids nested commands inside an open DataReader",
+      "tests": "tests/test_stage_g8_finance.py (17)"
+    },
+    "migration007": {
+      "file": "Database/migration_007.sql",
+      "purpose": "reporting views read posted journal data only",
+      "idempotent": true,
+      "integrity": "ok"
+    },
+    "g9Accounting": {
+      "journalService": "JournalService.cs (balanced entries, 2+ lines, post requires approved document)",
+      "profitLossService": "ProfitLossService.cs (grossProfit = REVENUE - COGS, operatingProfit)",
+      "documentJournalRules": "PURCHASE/SALE/BANK_TXN/CHEQUE mapped to system ledger accounts",
+      "vat": "VAT_RATE_PERCENT parameter, default 9 percent, applies to SALE only",
+      "approvalService": "posts the document journal entry on approval",
+      "moduleServices": "Purchase/Sales/Bank/Cheque set requires_journal=1 and build the entry in-transaction",
+      "tests": "tests/test_stage_g9_accounting.py (12)"
+    },
+    "g10DashboardReports": {
+      "reportService": "ReportService.cs (7 read-only management reports over reconciliation views and posted journals)",
+      "reportsWindow": "Views/ReportsWindow.cs (read-only browser + CSV export)",
+      "dashboardWindow": "Views/DashboardWindow.cs (management dashboard and second display in one window)",
+      "secondDisplay": "read-only, maximised, topmost, self-refreshing every 30s, no write path",
+      "exportTable": "Import/ExportService.cs ExportTableCsv (same reports.view permission and export_runs audit)",
+      "reports": [
+        "STOCK_ON_HAND",
+        "PARTY_BALANCE",
+        "BANK_BALANCE",
+        "CHEQUE_REGISTER",
+        "DAILY_FLOW",
+        "PROFIT_LOSS",
+        "DOCUMENTS"
+      ],
+      "tests": "tests/test_stage_g10_dashboard_reports.py (13)"
+    },
+    "docsLayout": "all stage reports live in Mazandasht_Stage05/docs/ (G0..G10, G2 reconstructed)"
+  },
+  "dataPolicy": {
+    "realBusinessDataSeeded": false,
+    "realSourceRowsImported": false,
+    "blankTemplatesOnly": true,
+    "sampleBankNamesSeeded": 12,
+    "realBankAccountsSeeded": 0,
+    "verifiedBy": "tests/test_stage05_data_entry_and_reset.py::test_clean_database_seed_contains_system_defaults_only"
+  },
+  "knownGaps": [
+    "Backup/restore UI and automatic backup are not implemented.",
+    "Installer (Setup) is not created.",
+    "Windows WPF build and UI tests cannot run in this Linux environment.",
+    "Deactivation (is_active=0) of base-data records has no UI yet; only create and rename are exposed.",
+    "Write buttons are not hidden for roles without base.manage (the service rejects the write).",
+    "Export is CSV only; no .xlsx writer exists in the runtime (ExcelDataReader is read-only).",
+    "DPAPI decryption of staged payloads is verified only on Windows (BLK-001).",
+    "Sorting hard rejection limit is an operator parameter (contract defines no numeric threshold)",
+    "Partnership Excel profile 11_Partnership is not yet converted into share rows (arithmetic + apply only)",
+    "OperationalWindows.cs weighing screen still uses hardcoded colours",
+    "Returned/cancelled cheque reversal journal is not generated yet",
+    "Documents created before schema v7 with requires_journal=0 have no journal entry yet; AccountingWindow can create it",
+    "EXPENSE and WASTE document types have no dedicated module yet",
+    "Second display shows KPIs only; a dedicated hall layout (very large type, no scrolling) needs owner approval (O-13)"
+  ],
+  "blockers": [
+    {
+      "id": "BLK-001",
+      "title": "Windows build environment unavailable",
+      "detail": "No .NET SDK, MSBuild or C# compiler exists in this Linux sandbox; WPF .NET Framework 4.8 cannot be compiled or UI-tested here.",
+      "impact": [
+        "G4",
+        "G12",
+        "G13"
+      ],
+      "resolution": "Owner must build with MSBuild/Visual Studio 2022 + .NET Framework 4.8 Developer Pack on Windows 8.1/10/11 x64.",
+      "cyclesUsed": 0
+    },
+    {
+      "id": "BLK-002",
+      "title": "Real source workbooks not available",
+      "detail": "The private source Excel workbooks (sources/) are deliberately excluded from the runtime package; only blank templates and the audit docs are available.",
+      "impact": [
+        "G1"
+      ],
+      "resolution": "Owner must provide the real source workbooks (or approve structure extraction from the blank templates and documented rules).",
+      "cyclesUsed": 0
+    }
+  ],
+  "ownerApprovalsNeeded": [
+    "Confirmation that the imported Google Drive baseline is the authoritative 0.5.2-alpha3 source.",
+    "Provision of real source Excel workbooks for G1 formula/structure extraction.",
+    "Windows build + UI sign-off for G12/G13.",
+    "Approval of chart of accounts and tax/fee rules before production data entry.",
+    "Approval of the proposed brand palette and logo used by the icon set and themes.",
+    "Approval of the four shipped themes (Windows light default, Dark, Caspian, Forest) before release."
+  ],
+  "openFindings": [
+    "O-1 fiscal_year convention (Gregorian in current code vs Jalali rule) - owner decision",
+    "O-2 default chart of accounts needs owner approval",
+    "O-3 VAT rate 9% default needs owner approval",
+    "O-4 visual verification of live theme switching on Windows is pending (BLK-001)",
+    "O-13 second-display hall layout (type size, rotation, no-scroll) needs owner approval"
+  ],
+  "history": {
+    "note": "Local git history G1..G10 and the .venv were lost when the sandbox workspace was reset on 2026-11-19; the untracked source tree survived. The surviving tree was re-committed as one reconstruction commit, then pushed. Per-stage reports and tests remain the authoritative per-phase record.",
+    "reconstructedOnUtc": "2026-11-20T21:23:15Z",
+    "perStageCommitsLost": [
+      "5cec9d2",
+      "7d3eefb",
+      "7a06319",
+      "903470c",
+      "a9a0cea",
+      "e961da8",
+      "a00ef18",
+      "dbcc9c4",
+      "b4b9571",
+      "2eed577"
+    ]
+  }
+}

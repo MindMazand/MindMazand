@@ -1,0 +1,66 @@
+{
+  "product": "Mazandasht Desktop",
+  "stage": "05-alpha2",
+  "version": "0.5.1-alpha2",
+  "scope": [
+    "incremental schema migration 005 from schema version 4",
+    "sample bank institution catalogue with no real bank accounts or balances",
+    "visible extensible operation catalogue and business groups",
+    "manager-authorized addition of bank names and operation types",
+    "administrator-only database maintenance control hidden from non-admin users",
+    "service-level active ADMIN authorization for destructive reset",
+    "optional one-time first-admin Excel/CSV onboarding prompt persisted in local settings",
+    "Excel xlsx/xls and CSV comma/semicolon/tab intake with preview and source fingerprint",
+    "blank Excel templates for 11 data profiles",
+    "encrypted import preview staging; no operational commit"
+  ],
+  "data_policy": {
+    "real_business_data_seeded": false,
+    "real_source_rows_imported": false,
+    "blank_templates_only": true,
+    "sample_bank_names_seeded": 12,
+    "real_bank_accounts_seeded": 0,
+    "reset_preserves": [
+      "schema",
+      "system roles",
+      "permissions",
+      "base units",
+      "main groups",
+      "default operation catalogue",
+      "sample bank institution catalogue"
+    ],
+    "reset_removes": [
+      "users",
+      "parties",
+      "products",
+      "real bank accounts",
+      "documents",
+      "transactions",
+      "stock",
+      "cheques",
+      "baskets",
+      "import queues",
+      "business settings"
+    ]
+  },
+  "tests": {
+    "pytest_passed": 18,
+    "sqlite_schema_version": 5,
+    "sqlite_integrity_check": "passed",
+    "sqlite_foreign_key_check": "passed",
+    "sample_bank_catalogue": 12,
+    "default_operation_catalogue": 18,
+    "real_bank_accounts_seeded": 0,
+    "xaml_parse": "passed",
+    "csproj_parse": "passed",
+    "blank_excel_templates": 11,
+    "reset_safety_contract": "passed",
+    "pytest_skipped": 1
+  },
+  "windows_build": "not_run_no_dotnet_msbuild_or_csharp_compiler_in_environment",
+  "installer": "not_created",
+  "operational_excel_commit": "not_implemented_in_this_alpha_substage",
+  "purchase_sales_sorting_accounting_bank_cheque_settlement_engine": "in_progress_not_claimed_complete",
+  "source_workbooks_modified": false,
+  "source_audit_files_in_runtime_package": false
+}

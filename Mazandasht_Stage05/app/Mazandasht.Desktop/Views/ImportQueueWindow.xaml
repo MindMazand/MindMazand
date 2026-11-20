@@ -1,0 +1,70 @@
+<Window x:Class="Mazandasht.Desktop.Views.ImportQueueWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="صف ورود اطلاعات و خروجی | مازندشت" Width="1080" Height="720"
+        WindowStartupLocation="CenterOwner" FlowDirection="RightToLeft"
+        Background="{DynamicResource WindowBackgroundBrush}"
+        FontFamily="Vazirmatn, Segoe UI">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="صف ورود اطلاعات Excel / CSV" FontSize="22" FontWeight="Bold"
+                       Foreground="{DynamicResource TextBrush}"/>
+            <TextBlock Text="انتقال به جداول عملیاتی فقط پس از اعتبارسنجی و با مجوز «ثبت سند» امکان‌پذیر است. اسناد ورودی در وضعیت پیش‌نویس ثبت می‌شوند و تا تأیید مدیر و اجرای موتور ماژول هیچ اثر مالی یا انباری ندارند."
+                       FontSize="12" TextWrapping="Wrap" Margin="0,6,0,0"
+                       Foreground="{DynamicResource MutedTextBrush}"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" x:Name="BatchGrid" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" SelectionChanged="BatchGrid_SelectionChanged"
+                  Background="{DynamicResource PanelBackgroundBrush}"
+                  Foreground="{DynamicResource TextBrush}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="فایل منبع" Binding="{Binding SourceFileName}" Width="2*"/>
+                <DataGridTextColumn Header="شیت" Binding="{Binding SourceSheetName}" Width="*"/>
+                <DataGridTextColumn Header="پروفایل" Binding="{Binding ProfileDisplay}" Width="2*"/>
+                <DataGridTextColumn Header="مقصد" Binding="{Binding TargetKind}" Width="*"/>
+                <DataGridTextColumn Header="وضعیت" Binding="{Binding Status}" Width="*"/>
+                <DataGridTextColumn Header="کل" Binding="{Binding TotalRows}" Width="60"/>
+                <DataGridTextColumn Header="موفق" Binding="{Binding AcceptedRows}" Width="60"/>
+                <DataGridTextColumn Header="ردشده" Binding="{Binding RejectedRows}" Width="60"/>
+                <DataGridTextColumn Header="تاریخ ایجاد" Binding="{Binding CreatedAtUtc}" Width="2*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,12,0,0">
+            <Button x:Name="ValidateButton" Content="اعتبارسنجی (بدون ثبت)" Style="{StaticResource GlassButton}"
+                    Width="180" Click="Validate_Click"/>
+            <Button x:Name="CommitButton" Content="انتقال به جداول عملیاتی" Style="{StaticResource AccentButton}"
+                    Width="200" Margin="10,0,0,0" Click="Commit_Click"/>
+            <Button x:Name="CancelButton" Content="لغو بسته" Style="{StaticResource GlassButton}"
+                    Width="130" Margin="10,0,0,0" Click="Cancel_Click"/>
+            <Button x:Name="ExportButton" Content="خروجی CSV اسناد" Style="{StaticResource GlassButton}"
+                    Width="160" Margin="10,0,0,0" Click="Export_Click"/>
+            <Button x:Name="RefreshButton" Content="بازخوانی" Style="{StaticResource GlassButton}"
+                    Width="120" Margin="10,0,0,0" Click="Refresh_Click"/>
+        </StackPanel>
+
+        <DataGrid Grid.Row="4" x:Name="RowGrid" AutoGenerateColumns="False" IsReadOnly="True"
+                  Background="{DynamicResource PanelBackgroundBrush}"
+                  Foreground="{DynamicResource TextBrush}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ردیف منبع" Binding="{Binding RowNumber}" Width="*"/>
+                <DataGridTextColumn Header="وضعیت" Binding="{Binding Status}" Width="*"/>
+                <DataGridTextColumn Header="موجودیت مقصد" Binding="{Binding TargetEntity}" Width="*"/>
+                <DataGridTextColumn Header="علت رد" Binding="{Binding Error}" Width="4*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock Grid.Row="5" x:Name="StatusText" Margin="0,10,0,0" TextWrapping="Wrap"
+                   Foreground="{DynamicResource MutedTextBrush}"/>
+    </Grid>
+</Window>

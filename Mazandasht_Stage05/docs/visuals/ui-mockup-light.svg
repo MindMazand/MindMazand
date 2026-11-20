@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="Vazirmatn, Segoe UI, Tahoma">
+<rect width="1600" height="1000" fill="#F3F3F3"/>
+<rect x="0" y="0" width="1600" height="88" fill="#E9F2EC"/>
+<line x1="0" y1="88" x2="1600" y2="88" stroke="#D7E2DA" stroke-width="1"/>
+<circle cx="1520" cy="44" r="26" fill="#1B5E3A"/>
+<text x="1470" y="52" font-size="24" font-weight="bold" fill="#17211B" text-anchor="end">سامانه یکپارچه مازندشت</text>
+<text x="1470" y="74" font-size="13" fill="#5F6B63" text-anchor="end">مدیریت عملیات، بازرگانی و حسابداری</text>
+<rect x="40" y="26" width="190" height="36" rx="18" fill="#FFFFFF" stroke="#D7E2DA"/>
+<text x="216" y="49" font-size="13" fill="#5F6B63" text-anchor="end">آفلاین | پایگاه داده محلی</text>
+<rect x="182" y="26" width="130" height="36" rx="18" fill="#FFFFFF" stroke="#D7E2DA"/>
+<text x="298" y="49" font-size="13" fill="#5F6B63" text-anchor="end">۱۴۰۴/۰۸/۲۹</text>
+<rect x="1300" y="88" width="300" height="912" fill="#FFFFFF"/>
+<line x1="1300" y1="88" x2="1300" y2="1000" stroke="#D7E2DA" stroke-width="1"/>
+<rect x="1316" y="96" width="268" height="40" rx="10" fill="#1B5E3A"/>
+<text x="1568" y="121" font-size="14" fill="#FFFFFF" text-anchor="end">داشبورد مدیریتی</text>
+<text x="1568" y="169" font-size="14" fill="#17211B" text-anchor="end">ثبت سریع عملیات</text>
+<text x="1568" y="217" font-size="14" fill="#17211B" text-anchor="end">بررسی و تأیید اسناد</text>
+<text x="1568" y="265" font-size="14" fill="#17211B" text-anchor="end">باسکول و ورود بار</text>
+<text x="1568" y="313" font-size="14" fill="#17211B" text-anchor="end">سورتینگ و انبار</text>
+<text x="1568" y="361" font-size="14" fill="#17211B" text-anchor="end">خرید و فروش</text>
+<text x="1568" y="409" font-size="14" fill="#17211B" text-anchor="end">حسابداری و مالی</text>
+<text x="1568" y="457" font-size="14" fill="#17211B" text-anchor="end">بانک و چک</text>
+<text x="1568" y="505" font-size="14" fill="#17211B" text-anchor="end">سبد و امانی</text>
+<text x="1568" y="553" font-size="14" fill="#17211B" text-anchor="end">اشخاص و کارکنان</text>
+<text x="1568" y="601" font-size="14" fill="#17211B" text-anchor="end">گزارش‌های تحلیلی</text>
+<text x="1568" y="649" font-size="14" fill="#17211B" text-anchor="end">ورود اطلاعات Excel / CSV</text>
+<text x="1568" y="697" font-size="14" fill="#17211B" text-anchor="end">اطلاعات پایه و تنظیمات</text>
+<rect x="40" y="120" width="292" height="128" rx="16" fill="#FFFFFF" stroke="#D7E2DA"/>
+<rect x="40" y="120" width="6" height="128" rx="3" fill="#1B5E3A"/>
+<text x="314" y="158" font-size="14" fill="#5F6B63" text-anchor="end">ورودی امروز (kg)</text>
+<text x="314" y="208" font-size="26" font-weight="bold" fill="#17211B" text-anchor="end">۱۲٬۴۸۰</text>
+<rect x="348" y="120" width="292" height="128" rx="16" fill="#FFFFFF" stroke="#D7E2DA"/>
+<rect x="348" y="120" width="6" height="128" rx="3" fill="#C75A08"/>
+<text x="622" y="158" font-size="14" fill="#5F6B63" text-anchor="end">خروجی امروز (kg)</text>
+<text x="622" y="208" font-size="26" font-weight="bold" fill="#17211B" text-anchor="end">۹٬۳۱۵</text>
+<rect x="656" y="120" width="292" height="128" rx="16" fill="#FFFFFF" stroke="#D7E2DA"/>
+<rect x="656" y="120" width="6" height="128" rx="3" fill="#1B5E3A"/>
+<text x="930" y="158" font-size="14" fill="#5F6B63" text-anchor="end">فروش امروز</text>
+<text x="930" y="208" font-size="26" font-weight="bold" fill="#17211B" text-anchor="end">۱٬۲۴۰٬۰۰۰</text>
+<rect x="964" y="120" width="292" height="128" rx="16" fill="#FFFFFF" stroke="#D7E2DA"/>
+<rect x="964" y="120" width="6" height="128" rx="3" fill="#2E7D5B"/>
+<text x="1238" y="158" font-size="14" fill="#5F6B63" text-anchor="end">مانده اشخاص</text>
+<text x="1238" y="208" font-size="26" font-weight="bold" fill="#17211B" text-anchor="end">۳۸۶٬۵۰۰</text>
+<rect x="40" y="272" width="760" height="380" rx="16" fill="#FFFFFF" stroke="#D7E2DA"/>
+<text x="780" y="308" font-size="16" font-weight="bold" fill="#17211B" text-anchor="end">جریان هفت‌روزه باسکول</text>
+<text x="60" y="308" font-size="12" fill="#1B5E3A">■ ورودی</text>
+<text x="150" y="308" font-size="12" fill="#C75A08">■ خروجی</text>
+<rect x="82" y="458" width="16" height="144" rx="4" fill="#1B5E3A"/>
+<rect x="104" y="506" width="16" height="96" rx="4" fill="#C75A08"/>
+<text x="100" y="628" font-size="13" fill="#5F6B63" text-anchor="middle">ش</text>
+<rect x="182" y="415" width="16" height="187" rx="4" fill="#1B5E3A"/>
+<rect x="204" y="463" width="16" height="139" rx="4" fill="#C75A08"/>
+<text x="200" y="628" font-size="13" fill="#5F6B63" text-anchor="middle">ی</text>
+<rect x="282" y="478" width="16" height="124" rx="4" fill="#1B5E3A"/>
+<rect x="304" y="497" width="16" height="105" rx="4" fill="#C75A08"/>
+<text x="300" y="628" font-size="13" fill="#5F6B63" text-anchor="middle">د</text>
+<rect x="382" y="386" width="16" height="216" rx="4" fill="#1B5E3A"/>
+<rect x="404" y="434" width="16" height="168" rx="4" fill="#C75A08"/>
+<text x="400" y="628" font-size="13" fill="#5F6B63" text-anchor="middle">س</text>
+<rect x="482" y="434" width="16" height="168" rx="4" fill="#1B5E3A"/>
+<rect x="504" y="482" width="16" height="120" rx="4" fill="#C75A08"/>
+<text x="500" y="628" font-size="13" fill="#5F6B63" text-anchor="middle">چ</text>
+<rect x="582" y="401" width="16" height="201" rx="4" fill="#1B5E3A"/>
+<rect x="604" y="454" width="16" height="148" rx="4" fill="#C75A08"/>
+<text x="600" y="628" font-size="13" fill="#5F6B63" text-anchor="middle">پ</text>
+<rect x="682" y="444" width="16" height="158" rx="4" fill="#1B5E3A"/>
+<rect x="704" y="487" width="16" height="115" rx="4" fill="#C75A08"/>
+<text x="700" y="628" font-size="13" fill="#5F6B63" text-anchor="middle">ج</text>
+<line x1="80" y1="602" x2="770" y2="602" stroke="#E4EBE6" stroke-width="1"/>
+<line x1="80" y1="542" x2="770" y2="542" stroke="#E4EBE6" stroke-width="1"/>
+<line x1="80" y1="482" x2="770" y2="482" stroke="#E4EBE6" stroke-width="1"/>
+<line x1="80" y1="422" x2="770" y2="422" stroke="#E4EBE6" stroke-width="1"/>
+<line x1="80" y1="362" x2="770" y2="362" stroke="#E4EBE6" stroke-width="1"/>
+<rect x="824" y="272" width="436" height="380" rx="16" fill="#FFFFFF" stroke="#D7E2DA"/>
+<text x="1240" y="308" font-size="16" font-weight="bold" fill="#17211B" text-anchor="end">آخرین اسناد</text>
+<text x="1168" y="348" font-size="12" fill="#5F6B63">شماره</text>
+<text x="1084" y="348" font-size="12" fill="#5F6B63">نوع</text>
+<text x="980" y="348" font-size="12" fill="#5F6B63">موضوع</text>
+<text x="900" y="348" font-size="12" fill="#5F6B63">مقدار</text>
+<text x="834" y="348" font-size="12" fill="#5F6B63">وضعیت</text>
+<text x="1234" y="380" font-size="12" fill="#17211B" text-anchor="end">W-1404-000128</text>
+<text x="1156" y="380" font-size="12" fill="#17211B" text-anchor="end">باسکول ورودی</text>
+<text x="1072" y="380" font-size="12" fill="#17211B" text-anchor="end">پرتقال</text>
+<text x="968" y="380" font-size="12" fill="#17211B" text-anchor="end">۴٬۲۰۰</text>
+<text x="888" y="380" font-size="12" fill="#17211B" text-anchor="end">تأییدشده</text>
+<line x1="842" y1="402" x2="1242" y2="402" stroke="#E4EBE6"/>
+<text x="1234" y="420" font-size="12" fill="#17211B" text-anchor="end">S-1404-000045</text>
+<text x="1156" y="420" font-size="12" fill="#17211B" text-anchor="end">سورتینگ</text>
+<text x="1072" y="420" font-size="12" fill="#17211B" text-anchor="end">پرتقال درجه یک</text>
+<text x="968" y="420" font-size="12" fill="#17211B" text-anchor="end">۳٬۸۰۰</text>
+<text x="888" y="420" font-size="12" fill="#17211B" text-anchor="end">بررسی</text>
+<line x1="842" y1="442" x2="1242" y2="442" stroke="#E4EBE6"/>
+<text x="1234" y="460" font-size="12" fill="#17211B" text-anchor="end">P-1404-000011</text>
+<text x="1156" y="460" font-size="12" fill="#17211B" text-anchor="end">فاکتور خرید</text>
+<text x="1072" y="460" font-size="12" fill="#17211B" text-anchor="end">شرکت نمونه</text>
+<text x="968" y="460" font-size="12" fill="#17211B" text-anchor="end">۱۲٬۰۰۰</text>
+<text x="888" y="460" font-size="12" fill="#17211B" text-anchor="end">تأییدشده</text>
+<line x1="842" y1="482" x2="1242" y2="482" stroke="#E4EBE6"/>
+<text x="1234" y="500" font-size="12" fill="#17211B" text-anchor="end">B-1404-000007</text>
+<text x="1156" y="500" font-size="12" fill="#17211B" text-anchor="end">تراکنش بانکی</text>
+<text x="1072" y="500" font-size="12" fill="#17211B" text-anchor="end">بانک صادرات</text>
+<text x="968" y="500" font-size="12" fill="#17211B" text-anchor="end">۵۰۰٬۰۰۰</text>
+<text x="888" y="500" font-size="12" fill="#17211B" text-anchor="end">تأییدشده</text>
+<line x1="842" y1="522" x2="1242" y2="522" stroke="#E4EBE6"/>
+<text x="40" y="976" font-size="12" fill="#5F6B63">مازندشت ۰٫۵٫۲-alpha3 | تم: روشن</text>
+</svg>

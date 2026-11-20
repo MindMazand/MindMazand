@@ -1,0 +1,130 @@
+{
+  "schema": "mazandasht.rules/v1",
+  "version": "1.0",
+  "updatedAt": "2026-11-19",
+  "documentLifecycle": {
+    "states": ["DRAFT", "REVIEW", "APPROVED", "VOIDED"],
+    "transitions": [
+      { "from": "DRAFT", "to": "REVIEW", "roles": ["ADMIN", "MANAGER"], "requires": "structural_validation" },
+      { "from": "REVIEW", "to": "APPROVED", "roles": ["ADMIN", "MANAGER"], "requires": "balanced_journal_if_required_and_pending_stock_if_required" },
+      { "from": "DRAFT", "to": "VOIDED", "roles": ["ADMIN", "MANAGER"], "requires": "none" },
+      { "from": "REVIEW", "to": "VOIDED", "roles": ["ADMIN", "MANAGER"], "requires": "none" },
+      { "from": "APPROVED", "to": "VOIDED", "roles": ["ADMIN", "MANAGER"], "requires": "posted_reversal_journal_and_posted_reversal_stock" }
+    ],
+    "immutableAfterApproved": true,
+    "numbering": {
+      "uniqueKey": ["document_type", "fiscal_year", "document_number"],
+      "sequenceTable": "document_sequences",
+      "fiscalYearCalendar": "jalali"
+    }
+  },
+  "money": {
+    "currency": "IRR",
+    "storage": "integer_rial",
+    "displayUnits": ["rial", "toman"],
+    "tomanDivisor": 10,
+    "rounding": "half_up",
+    "weightStorage": "integer_gram",
+    "excelWeightUnit": "kilogram",
+    "kgToGramFactor": 1000
+  },
+  "inventory": {
+    "allocationMethod": "FIFO",
+    "fifoOrderBy": ["stock_lots.created_at_utc", "stock_lots.id"],
+    "allowNegativeBalance": false,
+    "postingRequiresApprovedDocument": true,
+    "postedMovementsImmutable": true,
+    "transferPairMovementTypes": ["TRANSFER_OUT", "TRANSFER_IN"]
+  },
+  "weighing": {
+    "netFormula": "net_weight_g = gross_weight_g - tare_weight_g - loss_weight_g",
+    "constraint": "tare_weight_g + loss_weight_g <= gross_weight_g",
+    "lossRateUnit": "basis_points",
+    "lossRateMax": 10000
+  },
+  "sorting": {
+    "balanceFormula": "variance_weight_g = input_weight_g - (output_weight_g + waste_weight_g + process_loss_weight_g)",
+    "statuses": {
+      "MATCHED": "abs(variance) <= tolerance",
+      "WARNING": "abs(variance) > tolerance (manager approval required)",
+      "REJECTED": "variance beyond hard limit"
+    },
+    "defaultToleranceG": 0
+  },
+  "basket": {
+    "independentOfMoney": true,
+    "movementTypes": ["PURCHASE", "ISSUE", "RETURN", "CUSTODY_IN", "CUSTODY_OUT", "TRANSFER_IN", "TRANSFER_OUT", "ADJUSTMENT"],
+    "custodyBalanceFormula": "CUSTODY_IN - CUSTODY_OUT",
+    "custodyReturnLimit": "confirmed_custody_balance"
+  },
+  "invoices": {
+    "purchase": {
+      "linkage": "source_weigh_document_id",
+      "netFormula": "net_amount_irr = quantity_g * unit_price_irr_per_kg / 1000 - discount_irr + freight_irr + commission_irr + other_adjustments_irr"
+    },
+    "sales": {
+      "linkage": ["source_weigh_document_id", "source_sorting_output_id"],
+      "netFormula": "net_receivable_irr = quantity_g * unit_price_irr_per_kg / 1000 - discount_irr + freight_irr + commission_irr + other_costs_irr",
+      "allocationRequired": true,
+      "oversellAllowed": false
+    },
+    "emptyInvoiceApprovable": false
+  },
+  "cheque": {
+    "states": ["ISSUED", "CIRCULATING", "CLEARED", "RETURNED", "CANCELLED"],
+    "uniqueKey": ["bank_account_id", "cheque_number"],
+    "clearanceCreatesBankTransaction": true
+  },
+  "settlement": {
+    "links": "payment_document -> invoice_document",
+    "allocationSumMustNotExceedPayment": true,
+    "overAllocatedInvoiceRequires": "advance_or_clearing_document",
+    "createsNewBankTransaction": false
+  },
+  "partnership": {
+    "shareSumMustEqual": 100,
+    "roundingUnitDefaultKg": 1,
+    "remainderPolicy": "last_line"
+  },
+  "accounting": {
+    "journal": {
+      "minLines": 2,
+      "mustBalance": true,
+      "postRequiresApprovedDocument": true,
+      "postedLinesImmutable": true
+    },
+    "documentJournalRules": [
+      { "documentType": "PURCHASE", "debit": ["COGS", "PURCHASE_EXPENSES"], "credit": ["PARTY_PAYABLE", "BANK"] },
+      { "documentType": "SALE", "debit": ["PARTY_RECEIVABLE", "BANK"], "credit": ["REVENUE", "TAX_PAYABLE"] },
+      { "documentType": "BANK_TXN", "debit": ["BANK"], "credit": ["PARTY_RECEIVABLE", "REVENUE", "EXPENSE"] },
+      { "documentType": "CHEQUE", "debit": ["PARTY_PAYABLE", "PARTY_RECEIVABLE"], "credit": ["BANK"] },
+      { "documentType": "ADJUSTMENT", "debit": ["WASTE_EXPENSE"], "credit": ["INVENTORY"] },
+      { "documentType": "STOCK_TRANSFER", "debit": ["INVENTORY_DEST"], "credit": ["INVENTORY_SOURCE"] }
+    ],
+    "profitLoss": {
+      "grossProfit": "REVENUE - COGS",
+      "operatingProfit": "grossProfit - OPERATING_EXPENSES",
+      "cogsMethod": "FIFO"
+    },
+    "accountClasses": ["ASSET", "LIABILITY", "EQUITY", "REVENUE", "EXPENSE", "CONTROL"]
+  },
+  "tax": {
+    "vatRatePercent": 9,
+    "appliesTo": "SALE",
+    "ownerApprovalRequired": true
+  },
+  "roles": {
+    "systemRoles": ["ADMIN", "MANAGER", "ACCOUNTANT", "SCALE", "SALES", "SUPERVISOR"],
+    "enforcedByRoleCodeOnly": ["database.reset"],
+    "ADMIN": ["base.manage", "documents.approve", "documents.void", "journal.view", "reports.view", "backup.manage", "users.manage"],
+    "MANAGER": ["base.manage", "documents.approve", "documents.void", "journal.view", "reports.view", "backup.manage"],
+    "ACCOUNTANT": ["documents.create", "bank.manage", "cheque.manage", "journal.view", "reports.view"],
+    "SCALE": ["documents.create", "weighing.manage", "sorting.manage", "stock.manage", "basket.manage"],
+    "SALES": ["documents.create", "sale.manage", "reports.view"],
+    "SUPERVISOR": ["reports.view", "journal.view", "audit.view"]
+  },
+  "reports": {
+    "onlyPostedData": true,
+    "list": ["trial_balance", "profit_loss", "party_ledger", "stock_lot_ledger", "bank_transactions", "cheque_register"]
+  }
+}
