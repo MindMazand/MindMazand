@@ -7,7 +7,7 @@
 | مورد | وضعیت |
 |---|---|
 | ساختار پایگاه‌داده | نسخهٔ ۷ (`schema_v1` + `system_seed` + `migration_002..007`) |
-| اجرای آزمون‌ها (لینوکس) | **۱۹۰ قبول / ۱ رد / ۰ ناموفق** |
+| اجرای آزمون‌ها (لینوکس) | **۱۹۷ قبول / ۱ رد / ۰ ناموفق** |
 | یکپارچگی SQLite | `integrity_check = ok` و `foreign_key_check = []` |
 | هدف ساخت | **x64**، Release، .NET Framework 4.8، C# 7.3، WPF |
 | حداقل سیستم‌عامل | ویندوز ۸٫۱ Update x64 |
@@ -33,12 +33,29 @@
 
 ## چگونه روی ویندوز ساخته شود
 
+اگر ابزارها را ندارید، یک بار:
+
+```bat
+setup-windows-prerequisites.bat
+```
+
+این اسکریپت فقط همان ابزارهایی را که کم دارید نصب می‌کند (Visual Studio 2022 Build
+Tools + .NET 4.8، Inno Setup 6، Python 3.11) و هیچ‌چیز حذف نمی‌کند. اگر `winget`
+در دسترس نباشد، راهنمای دستی چاپ می‌کند.
+
+بعد:
+
 ```bat
 build-windows.bat
 ```
 
-پیش‌نیازها: Visual Studio 2022 (دسکتاپ .NET)، .NET Framework 4.8 Developer Pack،
-Inno Setup 6 و (توصیه‌شده) Python 3.11+. جزئیات: `installer/README_FA.md`.
+این اسکریپت MSBuild را با `vswhere` پیدا می‌کند، خروجی را با
+`tools\verify_windows_build.py` بررسی می‌کند و نصب‌کننده را می‌سازد. در پایان یک بار
+«Press any key» می‌گیرد تا خروجی بعد از دابل‌کلیک قابل خواندن باشد.
+
+پیش‌نیازها (اگر دستی نصب می‌کنید): Visual Studio 2022 (دسکتاپ .NET)،
+.NET Framework 4.8 Developer Pack، Inno Setup 6 و (توصیه‌شده) Python 3.11+.
+جزئیات: `installer/README_FA.md`.
 گزارش کامل: `docs/G12_Build_Installer_Windows_Report_FA.md`.
 
 ## سیاست داده (بدون تغییر)

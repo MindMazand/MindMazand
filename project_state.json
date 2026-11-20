@@ -7,7 +7,7 @@
   "schemaVersion": 7,
   "targetSchemaVersion": 7,
   "branch": "arena/afb5578d-mindmazand",
-  "updatedAtUtc": "2026-11-20T21:55:00Z",
+  "updatedAtUtc": "2026-11-20T22:20:00Z",
   "technology": {
     "ui": "WPF",
     "language": "C# 7.3",
@@ -103,11 +103,11 @@
   },
   "verification": {
     "pytest": {
-      "passed": 190,
+      "passed": 197,
       "skipped": 1,
       "failed": 0,
       "command": "Mazandasht_Stage05/.venv/bin/python -m pytest -q tests/",
-      "verifiedAtUtc": "2026-11-20T21:55:00Z"
+      "verifiedAtUtc": "2026-11-20T22:20:00Z"
     },
     "sqliteIntegrityCheck": "passed",
     "sqliteForeignKeyCheck": "passed",
@@ -260,7 +260,11 @@
       "outputVerification": "tools/verify_windows_build.py (executed for real in tests)",
       "installer": "installer/Mazandasht_Setup.iss (per-user, x64 only, Windows 8.1 minimum)",
       "installerDocs": "installer/README_FA.md",
-      "tests": "tests/test_stage_g12_build_installer.py (19)"
+      "tests": "tests/test_stage_g12_build_installer.py (26)",
+      "prerequisitesInstaller": "setup-windows-prerequisites.bat (winget: VS 2022 Build Tools + .NET 4.8 targeting pack, Inno Setup 6, Python 3.11; only what is missing)",
+      "msbuildDiscovery": "build-windows.bat finds MSBuild through vswhere, not PATH",
+      "windowsLineEndings": "build-windows.bat, setup-windows-prerequisites.bat and Mazandasht_Setup.iss are CRLF; the .iss is UTF-8 with BOM; .gitattributes pins eol=crlf",
+      "doubleClickPause": "build-windows.bat pauses at the end so the window does not close"
     },
     "g13Acceptance": {
       "tests": "tests/test_stage_g13_acceptance.py (8)",
@@ -363,7 +367,7 @@
       "b4b9571",
       "2eed577"
     ],
-    "g13": "2026-11-19: اجرای پذیرش داده‌لایه با روز کاری آزمایشی و SQL واقعی سرویس‌ها؛ ۱۹۰ قبول / ۱ رد؛ گزارش docs/G13_Acceptance_Delivery_Report_FA.md؛ ثبت O-19."
+    "g13": "2026-11-19: اجرای پذیرش داده‌لایه با روز کاری آزمایشی و SQL واقعی سرویس‌ها؛ ۱۹۷ قبول / ۱ رد؛ گزارش docs/G13_Acceptance_Delivery_Report_FA.md؛ ثبت O-19؛ افزودن setup-windows-prerequisites.bat و اصلاح پایان خط LF اسکریپت‌های ویندوز."
   },
   "docsLayout": "all stage reports live in Mazandasht_Stage05/docs/ (G0..G13, G2 reconstructed)"
 }

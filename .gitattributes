@@ -1,0 +1,8 @@
+# Windows command scripts and the Inno Setup script must be checked out with
+# CRLF line endings: cmd.exe mis-parses LF-only .bat files (multi-line blocks),
+# and Inno Setup expects CRLF. The .iss file is UTF-8 with a BOM so its Persian
+# strings survive.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.iss text eol=crlf
+*.ps1 text eol=crlf

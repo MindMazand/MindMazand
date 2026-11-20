@@ -191,6 +191,60 @@ class StageG12BuildInstaller(unittest.TestCase):
         self.assertNotIn("BUILD SUCCEEDED", report)
         self.assertRegex(report, r"(اجرای واقعی|not run|blocked)")
 
+    # ------------------------------------------------------------------
+    # prerequisites installer and Windows script hygiene
+    def test_prerequisites_installer_exists_and_only_adds_missing_tools(self):
+        bat = (ROOT / "setup-windows-prerequisites.bat").read_text(encoding="utf-8")
+        for token in ("Microsoft.VisualStudio.2022.BuildTools",
+                      "Microsoft.Net.Component.4.8.TargetingPack",
+                      "JRSoftware.InnoSetup",
+                      "Python.Python.3.11",
+                      "winget install", "--yes"):
+            self.assertIn(token, bat)
+        # It must never uninstall anything.
+        self.assertNotIn("winget uninstall", bat)
+        self.assertNotIn("winget remove", bat)
+
+    def test_prerequisites_installer_handles_a_machine_without_winget(self):
+        bat = (ROOT / "setup-windows-prerequisites.bat").read_text(encoding="utf-8")
+        self.assertIn(":no_winget", bat)
+        self.assertIn("installer\\README_FA.md", bat)
+        self.assertRegex(bat, r"exit /b 3")
+
+    def test_build_script_finds_msbuild_through_vswhere(self):
+        """MSBuild is not on PATH in a normal command window."""
+        bat = (ROOT / "build-windows.bat").read_text(encoding="utf-8")
+        self.assertIn("vswhere.exe", bat)
+        self.assertIn("Microsoft.Component.MSBuild", bat)
+        self.assertIn("setup-windows-prerequisites.bat", bat)
+        # A missing MSBuild still fails loudly.
+        self.assertIn("ERROR: MSBuild not found", bat)
+        self.assertIn("exit /b 2", bat)
+
+    def test_build_script_keeps_the_window_open_for_double_click(self):
+        bat = (ROOT / "build-windows.bat").read_text(encoding="utf-8")
+        self.assertIn("pause", bat)
+
+    def test_windows_scripts_use_crlf_line_endings(self):
+        """cmd.exe mis-parses LF-only .bat files; Inno Setup expects CRLF too."""
+        for name in ("build-windows.bat", "setup-windows-prerequisites.bat",
+                     "installer/Mazandasht_Setup.iss"):
+            data = (ROOT / name).read_bytes()
+            self.assertGreater(data.count(b"\r\n"), 0, name)
+            self.assertEqual(data.count(b"\n") - data.count(b"\r\n"), 0,
+                             name + " has bare LF line endings")
+
+    def test_installer_script_is_utf8_with_bom(self):
+        """The .iss carries Persian strings; without a BOM Inno Setup reads it
+        as ANSI and the installer UI turns into mojibake."""
+        data = (ROOT / "installer" / "Mazandasht_Setup.iss").read_bytes()
+        self.assertTrue(data.startswith(b"\xef\xbb\xbf"))
+
+    def test_readme_documents_the_prerequisites_installer(self):
+        readme = (INSTALLER / "README_FA.md").read_text(encoding="utf-8")
+        self.assertIn("setup-windows-prerequisites.bat", readme)
+        self.assertIn("--yes", readme)
+
 
 if __name__ == "__main__":
     unittest.main()
