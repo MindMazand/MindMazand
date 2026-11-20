@@ -7,7 +7,7 @@
   "schemaVersion": 7,
   "targetSchemaVersion": 7,
   "branch": "arena/afb5578d-mindmazand",
-  "updatedAtUtc": "2026-11-20T21:39:20Z",
+  "updatedAtUtc": "2026-11-20T21:45:56Z",
   "technology": {
     "ui": "WPF",
     "language": "C# 7.3",
@@ -90,8 +90,9 @@
     },
     "G12": {
       "title": "Build، Installer و سازگاری Windows",
-      "status": "pending",
-      "gate": "not_started"
+      "status": "authored",
+      "gate": "blocked_on_windows",
+      "note": "x64 build script, output verification and the Inno Setup installer are authored and statically verified; the real build/installer run needs Windows (BLK-001)."
     },
     "G13": {
       "title": "تست پذیرش و تحویل نهایی",
@@ -101,11 +102,11 @@
   },
   "verification": {
     "pytest": {
-      "passed": 163,
+      "passed": 182,
       "skipped": 1,
       "failed": 0,
       "command": ".venv/bin/python -m pytest -q tests/",
-      "verifiedAtUtc": "2026-11-20T21:39:20Z"
+      "verifiedAtUtc": "2026-11-20T21:45:56Z"
     },
     "sqliteIntegrityCheck": "passed",
     "sqliteForeignKeyCheck": "passed",
@@ -113,8 +114,8 @@
     "blankExcelTemplates": 11,
     "xamlParse": "passed (by pytest)",
     "csprojParse": "passed (by pytest)",
-    "wpfBuildOnWindows": "not_run_no_dotnet_msbuild_or_csharp_compiler_in_environment",
-    "installer": "not_created",
+    "wpfBuildOnWindows": "blocked_blk001_not_run",
+    "installer": "authored_inno_setup_6_not_compiled_here",
     "uiAutomation": "not_run",
     "excelTemplatesGen2": {
       "themes": [
@@ -251,6 +252,14 @@
       "automaticBackups": "logout and application-exit backups for flagged profiles",
       "auditPrivacy": "passwords, hashes and salts are never written to audit_log",
       "tests": "tests/test_stage_g11_backup_restore.py (25)"
+    },
+    "g12BuildInstaller": {
+      "platformTarget": "x64 (Mazandasht.Desktop.csproj) + Release|x64 in the solution",
+      "buildScript": "build-windows.bat (msbuild x64 Release -> verify output -> ISCC)",
+      "outputVerification": "tools/verify_windows_build.py (executed for real in tests)",
+      "installer": "installer/Mazandasht_Setup.iss (per-user, x64 only, Windows 8.1 minimum)",
+      "installerDocs": "installer/README_FA.md",
+      "tests": "tests/test_stage_g12_build_installer.py (19)"
     }
   },
   "dataPolicy": {
@@ -262,7 +271,6 @@
     "verifiedBy": "tests/test_stage05_data_entry_and_reset.py::test_clean_database_seed_contains_system_defaults_only"
   },
   "knownGaps": [
-    "Installer (Setup) is not created.",
     "Windows WPF build and UI tests cannot run in this Linux environment.",
     "Deactivation (is_active=0) of base-data records has no UI yet; only create and rename are exposed.",
     "Write buttons are not hidden for roles without base.manage (the service rejects the write).",
@@ -275,7 +283,10 @@
     "Documents created before schema v7 with requires_journal=0 have no journal entry yet; AccountingWindow can create it",
     "EXPENSE and WASTE document types have no dedicated module yet",
     "Second display shows KPIs only; a dedicated hall layout (very large type, no scrolling) needs owner approval (O-13)",
-    "Scheduled backup (reason SCHEDULED) has the schema and service support but no real scheduler; lands with the Windows task in G12"
+    "Scheduled backup (reason SCHEDULED) has the schema and service support but no real scheduler; lands with the Windows task in G12",
+    "Windows build, installer compilation and UI run are still not executed (BLK-001)",
+    "Installer and executable are not code-signed (O-16)",
+    ".NET Framework 4.8 is a manual prerequisite; the installer does not provision it (O-17)"
   ],
   "blockers": [
     {
@@ -316,7 +327,9 @@
     "O-4 visual verification of live theme switching on Windows is pending (BLK-001)",
     "O-13 second-display hall layout (type size, rotation, no-scroll) needs owner approval",
     "O-14 PlatformTarget is AnyCPU with Prefer32Bit=false; set explicitly to x64 in G12 if that is the requirement",
-    "O-15 SCHEDULED backups need a Windows Task Scheduler integration (G12)"
+    "O-15 SCHEDULED backups need a Windows Task Scheduler integration (G12)",
+    "O-16 no code signing for the installer or the executable (SmartScreen warnings)",
+    "O-17 .NET Framework 4.8 is not provisioned by the installer"
   ],
   "history": {
     "note": "Local git history G1..G10 and the .venv were lost when the sandbox workspace was reset on 2026-11-19; the untracked source tree survived. The surviving tree was re-committed as one reconstruction commit, then pushed. Per-stage reports and tests remain the authoritative per-phase record.",

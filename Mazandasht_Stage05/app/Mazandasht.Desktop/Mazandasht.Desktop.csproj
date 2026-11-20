@@ -6,7 +6,10 @@
     <LangVersion>7.3</LangVersion>
     <RootNamespace>Mazandasht.Desktop</RootNamespace>
     <AssemblyName>Mazandasht.Desktop</AssemblyName>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <!-- x64 is the supported target (see docs/G12_Build_Installer_Windows_Report_FA.md).
+         System.Data.SQLite loads its native interop from the x64\ subdirectory,
+         which App.config already probes. -->
+    <PlatformTarget>x64</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <ApplicationManifest>app.manifest</ApplicationManifest>
