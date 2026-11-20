@@ -175,6 +175,24 @@
                                 <TextBlock Text="مدیریت پایگاه داده" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Button>
+                        <Button Tag="پشتیبان و بازیابی" Style="{StaticResource NavButton}" Click="OpenBackup_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/backup.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="پشتیبان و بازیابی" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="امنیت و کاربران" Style="{StaticResource NavButton}" Click="OpenSecurity_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/parties.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="امنیت و کاربران" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Tag="خروج از حساب کاربری" Style="{StaticResource NavButton}" Click="Logout_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="Assets/Icons/approval.png" Width="20" Height="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="خروج از حساب کاربری" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button>
                         <TextBlock Text="MAZANDASHT · OFFLINE DESKTOP" FontSize="9" Foreground="#71857A" Margin="10,18,0,0"/>
                     </StackPanel>
                 </DockPanel>

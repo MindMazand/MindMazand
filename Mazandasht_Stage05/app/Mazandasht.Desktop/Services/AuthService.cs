@@ -20,6 +20,7 @@ namespace Mazandasht.Desktop.Services
 
             if (username.Length < 4) throw new ArgumentException("نام کاربری باید حداقل ۴ نویسه باشد.");
             if (displayName.Length < 2) throw new ArgumentException("نام نمایشی معتبر نیست.");
+            UserAdminService.PasswordPolicy.ThrowIfWeak(username, password);
 
             var passwordHash = PasswordHasher.Create(password);
 
@@ -86,7 +87,14 @@ namespace Mazandasht.Desktop.Services
                     command.Parameters.AddWithValue("@username", (username ?? "").Trim());
                     using (var reader = command.ExecuteReader())
                     {
-                        if (!reader.Read()) return null;
+                        if (!reader.Read())
+                        {
+                            // Wrong username or a disabled account: record the
+                            // attempt without revealing which one.
+                            WriteSecurityEvent(connection, null, (username ?? "").Trim(),
+                                "LOGIN_FAILURE", "reason=unknown_user");
+                            return null;
+                        }
                         userId = reader.GetString(0);
                         displayName = reader.GetString(1);
                         hash = (byte[])reader["password_hash"];
@@ -97,7 +105,11 @@ namespace Mazandasht.Desktop.Services
                 }
 
                 if (!PasswordHasher.Verify(password, hash, salt, iterations))
+                {
+                    WriteSecurityEvent(connection, userId, (username ?? "").Trim(),
+                        "LOGIN_FAILURE", "reason=bad_password");
                     return null;
+                }
 
                 using (var update = new SQLiteCommand(
                     "UPDATE users SET last_login_at_utc=strftime('%Y-%m-%dT%H:%M:%fZ','now') WHERE id=@id;", connection))
@@ -105,6 +117,8 @@ namespace Mazandasht.Desktop.Services
                     update.Parameters.AddWithValue("@id", userId);
                     update.ExecuteNonQuery();
                 }
+                WriteSecurityEvent(connection, userId, (username ?? "").Trim(),
+                    "LOGIN_SUCCESS", "role=" + roleCode);
 
                 var session = new UserSession
                 {
@@ -113,6 +127,36 @@ namespace Mazandasht.Desktop.Services
                 };
                 AppSession.CurrentUser = session;
                 return session;
+            }
+        }
+
+        /// <summary>
+        /// Security events are part of the fixed schema enum, so only the codes
+        /// the database accepts may be written here.
+        /// </summary>
+        private static void WriteSecurityEvent(SQLiteConnection connection, string userId,
+            string usernameAttempted, string eventType, string details)
+        {
+            try
+            {
+                using (var command = new SQLiteCommand(
+                    @"INSERT INTO security_events(id,user_id,username_attempted,event_type,details_json,machine_name)
+                      VALUES(@id,@user,@username,@type,@details,@machine);", connection))
+                {
+                    command.Parameters.AddWithValue("@id", Guid.NewGuid().ToString("N"));
+                    command.Parameters.AddWithValue("@user", (object)userId ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@username",
+                        (object)usernameAttempted ?? DBNull.Value);
+                    command.Parameters.AddWithValue("@type", eventType);
+                    command.Parameters.AddWithValue("@details",
+                        "{\"detail\":\"" + (details ?? String.Empty).Replace("\"", "'") + "\"}");
+                    command.Parameters.AddWithValue("@machine", Environment.MachineName);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+                // Auditing must never block a login.
             }
         }
 

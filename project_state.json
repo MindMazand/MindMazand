@@ -7,7 +7,7 @@
   "schemaVersion": 7,
   "targetSchemaVersion": 7,
   "branch": "arena/afb5578d-mindmazand",
-  "updatedAtUtc": "2026-11-20T21:25:09Z",
+  "updatedAtUtc": "2026-11-20T21:39:20Z",
   "technology": {
     "ui": "WPF",
     "language": "C# 7.3",
@@ -85,8 +85,8 @@
     },
     "G11": {
       "title": "امنیت، Backup و Restore",
-      "status": "pending",
-      "gate": "not_started"
+      "status": "passed",
+      "gate": "passed"
     },
     "G12": {
       "title": "Build، Installer و سازگاری Windows",
@@ -101,11 +101,11 @@
   },
   "verification": {
     "pytest": {
-      "passed": 138,
+      "passed": 163,
       "skipped": 1,
       "failed": 0,
       "command": ".venv/bin/python -m pytest -q tests/",
-      "verifiedAtUtc": "2026-11-20T21:25:09Z"
+      "verifiedAtUtc": "2026-11-20T21:39:20Z"
     },
     "sqliteIntegrityCheck": "passed",
     "sqliteForeignKeyCheck": "passed",
@@ -241,7 +241,17 @@
       ],
       "tests": "tests/test_stage_g10_dashboard_reports.py (13)"
     },
-    "docsLayout": "all stage reports live in Mazandasht_Stage05/docs/ (G0..G10, G2 reconstructed)"
+    "docsLayout": "all stage reports live in Mazandasht_Stage05/docs/ (G0..G10, G2 reconstructed)",
+    "g11SecurityBackupRestore": {
+      "backupService": "BackupService.cs (SQLite online backup, profiles, retention, SHA-256, verification, history)",
+      "restoreService": "RestoreService.cs (ADMIN/MANAGER approval, exact phrase, PRE_RESTORE safety copy, atomic swap)",
+      "userAdminService": "UserAdminService.cs (users.manage, create/disable/reset, shared PasswordPolicy, last-admin guard)",
+      "authService": "login success/failure security events + password policy on first-run bootstrap",
+      "windows": "Views/BackupWindow.cs, Views/SecurityWindow.cs, Views/PasswordPromptWindow.cs",
+      "automaticBackups": "logout and application-exit backups for flagged profiles",
+      "auditPrivacy": "passwords, hashes and salts are never written to audit_log",
+      "tests": "tests/test_stage_g11_backup_restore.py (25)"
+    }
   },
   "dataPolicy": {
     "realBusinessDataSeeded": false,
@@ -252,7 +262,6 @@
     "verifiedBy": "tests/test_stage05_data_entry_and_reset.py::test_clean_database_seed_contains_system_defaults_only"
   },
   "knownGaps": [
-    "Backup/restore UI and automatic backup are not implemented.",
     "Installer (Setup) is not created.",
     "Windows WPF build and UI tests cannot run in this Linux environment.",
     "Deactivation (is_active=0) of base-data records has no UI yet; only create and rename are exposed.",
@@ -265,7 +274,8 @@
     "Returned/cancelled cheque reversal journal is not generated yet",
     "Documents created before schema v7 with requires_journal=0 have no journal entry yet; AccountingWindow can create it",
     "EXPENSE and WASTE document types have no dedicated module yet",
-    "Second display shows KPIs only; a dedicated hall layout (very large type, no scrolling) needs owner approval (O-13)"
+    "Second display shows KPIs only; a dedicated hall layout (very large type, no scrolling) needs owner approval (O-13)",
+    "Scheduled backup (reason SCHEDULED) has the schema and service support but no real scheduler; lands with the Windows task in G12"
   ],
   "blockers": [
     {
@@ -304,7 +314,9 @@
     "O-2 default chart of accounts needs owner approval",
     "O-3 VAT rate 9% default needs owner approval",
     "O-4 visual verification of live theme switching on Windows is pending (BLK-001)",
-    "O-13 second-display hall layout (type size, rotation, no-scroll) needs owner approval"
+    "O-13 second-display hall layout (type size, rotation, no-scroll) needs owner approval",
+    "O-14 PlatformTarget is AnyCPU with Prefer32Bit=false; set explicitly to x64 in G12 if that is the requirement",
+    "O-15 SCHEDULED backups need a Windows Task Scheduler integration (G12)"
   ],
   "history": {
     "note": "Local git history G1..G10 and the .venv were lost when the sandbox workspace was reset on 2026-11-19; the untracked source tree survived. The surviving tree was re-committed as one reconstruction commit, then pushed. Per-stage reports and tests remain the authoritative per-phase record.",

@@ -30,6 +30,77 @@ namespace Mazandasht.Desktop
             SalesUnitText.Text = "ریال | سند قطعی";
             PartyBalanceUnitText.Text = "ریال | دفتر کل";
             RefreshDashboard();
+            Closing += MainWindow_Closing;
+        }
+
+        /// <summary>
+        /// Exit backups run while the window is closing. A failure is reported
+        /// but never blocks the operator from leaving.
+        /// </summary>
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var user = AppSession.CurrentUser;
+            if (user == null) return;
+            try
+            {
+                var failures = BackupService.RunExitBackups(_databasePath, user.UserId);
+                if (failures.Count > 0)
+                    MessageBox.Show("برخی نسخه‌های پشتیبان هنگام خروج ساخته نشد:\n" +
+                        String.Join("\n", failures.ToArray()),
+                        "پشتیبان‌گیری خروج", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("پشتیبان‌گیری خروج انجام نشد: " + ex.Message,
+                    "پشتیبان‌گیری خروج", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+
+        private void OpenBackup_Click(object sender, RoutedEventArgs e)
+        {
+            var user = AppSession.CurrentUser;
+            if (user == null) return;
+            var window = new Views.BackupWindow(_databasePath, user.UserId) { Owner = this };
+            window.ShowDialog();
+        }
+
+        private void OpenSecurity_Click(object sender, RoutedEventArgs e)
+        {
+            var user = AppSession.CurrentUser;
+            if (user == null) return;
+            var window = new Views.SecurityWindow(_databasePath, user.UserId) { Owner = this };
+            window.ShowDialog();
+        }
+
+        /// <summary>
+        /// Logs the operator out: the logout backups run first, then the session
+        /// is dropped and the application restarts on the login screen.
+        /// </summary>
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            var user = AppSession.CurrentUser;
+            if (user == null) return;
+            var answer = MessageBox.Show("خروج از حساب کاربری؟\n\nقبل از خروج، نسخه‌های پشتیبان " +
+                "پروفایل‌های فعال با پرچم «پشتیبان هنگام خروج کاربر» ساخته می‌شوند.",
+                "خروج از حساب کاربری", MessageBoxButton.YesNo, MessageBoxImage.Question,
+                MessageBoxResult.No);
+            if (answer != MessageBoxResult.Yes) return;
+
+            try
+            {
+                var failures = BackupService.RunLogoutBackups(_databasePath, user.UserId);
+                if (failures.Count > 0)
+                    MessageBox.Show("برخی نسخه‌های پشتیبان قبل از خروج ساخته نشد:\n" +
+                        String.Join("\n", failures.ToArray()),
+                        "پشتیبان‌گیری خروج", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("پشتیبان‌گیری قبل از خروج انجام نشد: " + ex.Message,
+                    "پشتیبان‌گیری خروج", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            AppSession.CurrentUser = null;
+            Application.Current.Shutdown();
         }
 
         private static string GetPersianDate()
